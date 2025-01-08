@@ -1,0 +1,27 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+int solution(vector<int> number) {
+    int sum = 0;
+    int cnt = 0;
+    for(int i=0; i<number.size(); i++)
+    {
+        sum+=number.at(i);
+        for(int j=i+1; j<number.size(); j++)
+        {
+            sum+=number.at(j);
+            for(int k=j+1; k<number.size(); k++)
+            {
+                sum+=number.at(k);
+                if(sum==0)
+                    cnt++;
+                sum-=number.at(k);
+            }
+            sum-=number.at(j);
+        }
+        sum-=number.at(i);
+    }
+    
+    return cnt;
+}
