@@ -10,12 +10,8 @@ int solution(vector<vector<int>> sizes) {
     
     for(vector<int> temp : sizes)
     {
-        if(temp[0] < temp[1])
-        {
-            swap(temp[0], temp[1]);
-        }
-        max_width = max(max_width, temp[0]);
-        max_height = max(max_height, temp[1]);
+        max_width = max(max_width, max(temp[0], temp[1]));
+        max_height = max(max_height, min(temp[0], temp[1]));
     }
     
     return max_width * max_height;
