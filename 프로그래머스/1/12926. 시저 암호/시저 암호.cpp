@@ -1,15 +1,8 @@
 #include <string>
 #include <vector>
+#include <cctype>
 
 using namespace std;
-
-bool isUpper(char c)
-{
-    if(c >= 65 && c <= 90)
-        return true;
-    else
-        return false;
-}
 
 string solution(string s, int n) {
     string answer = "";
@@ -21,7 +14,7 @@ string solution(string s, int n) {
             continue;
         }
         
-        if((isUpper(c) && !isUpper(c+n)) || (!isUpper(c) && c+n > 122))
+        if((isupper(c) && !isupper(c+n)) || (islower(c) && !islower(c+n)))
         {
             c -= 26;
         }
