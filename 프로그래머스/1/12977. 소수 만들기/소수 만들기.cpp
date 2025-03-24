@@ -21,22 +21,16 @@ int solution(vector<int> nums) {
 
     for(int i=0; i<nums.size()-2; i++)
     {
-        int result = nums[i];
         for(int j=i+1; j<nums.size()-1; j++)
         {
-            result += nums[j];
             for(int k=j+1; k<nums.size(); k++)
             {
-                result += nums[k];
-                if(isPrimeNum(result))
+                if(isPrimeNum(nums[i]+nums[j]+nums[k]))
                 {
                     answer++;
                 }
-                result -= nums[k];
             }
-            result -= nums[j];
         }
-        result -= nums[i];
     }
 
     return answer;
