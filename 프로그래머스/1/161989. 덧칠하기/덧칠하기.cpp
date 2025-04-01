@@ -5,24 +5,14 @@ using namespace std;
 
 int solution(int n, int m, vector<int> section) {
     int answer = 0;
-    int start = 0;
-    while(start < section.size())
+    int start = section[0];
+    for(int wall_num : section)
     {
-        ++answer;
-        
-        int wall_num = section[start++]+m;
-        int i=start;
-        
-        for(i; i<section.size(); i++)
+        if(start <= wall_num)
         {
-            if(wall_num<=section[i])
-            {
-                start = i;
-                break;
-            }
+            ++answer;
+            start = wall_num+m;
         }
-        
-        if(i==section.size()) break;
     }
     return answer;
 }
