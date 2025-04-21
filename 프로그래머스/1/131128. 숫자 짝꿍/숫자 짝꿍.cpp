@@ -1,35 +1,22 @@
 #include <string>
+#include <vector>
 #include <map>
 
 using namespace std;
 
-string solution(string X, string Y) {
-    string answer = "";
-    map<char, int, greater<char>> mx, my;
-    
+string solution(string X, string Y)
+{
+    string answer="";
+    map<char,int> mx;
     for(char c : X) mx[c]++;
+    map<char,int> my;
     for(char c : Y) my[c]++;
-    
-    for(auto it : mx)
+    for(int i=9; i>=0; i--)
     {
-        int cnt;
-        
-        if(it.second < my[it.first]) cnt = it.second;
-        else cnt = my[it.first];
-        
-        if(answer.empty() && it.first == '0' && cnt != 0) 
-        {
-            answer = "0";
-            break;
-        }
-        
-        for(int j =0; j<cnt; j++)
-        {
-            answer += it.first;
-        }
+        int num=min(mx[i+'0'],my[i+'0']);
+        for(int j=0; j<num; j++) answer+=i+'0';
     }
-    
-    if(answer.empty()) answer = "-1";
-
+    if(answer=="") answer="-1";
+    else if(answer[0]=='0' && answer.size()>1) answer="0";
     return answer;
 }
