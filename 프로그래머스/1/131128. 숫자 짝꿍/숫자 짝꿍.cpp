@@ -1,64 +1,35 @@
 #include <string>
-#include <vector>
-#include <algorithm>
+#include <map>
 
 using namespace std;
 
 string solution(string X, string Y) {
     string answer = "";
-    string str1, str2;
-    int i = 0;
-
-    if (X.length() > Y.length())
+    map<char, int, greater<char>> mx, my;
+    
+    for(char c : X) mx[c]++;
+    for(char c : Y) my[c]++;
+    
+    for(auto it : mx)
     {
-        str1 = Y;
-        str2 = X;
-    }
-    else
-    {
-        str1 = X;
-        str2 = Y;
-    }
-
-    sort(str1.rbegin(), str1.rend());
-    sort(str2.rbegin(), str2.rend());
-
-    while (i < str1.length())
-    {
-        int char1_cnt = 0;
-        int char2_cnt = 0;
-        int common_cnt = 0;
-
-        if (str2.find(str1[i]) != string::npos)
+        int cnt;
+        
+        if(it.second < my[it.first]) cnt = it.second;
+        else cnt = my[it.first];
+        
+        if(answer.empty() && it.first == '0' && cnt != 0) 
         {
-            char1_cnt = str1.find_last_of(str1[i]) - str1.find_first_of(str1[i]) + 1;
-            char2_cnt = str2.find_last_of(str1[i]) - str2.find_first_of(str1[i]) + 1;
-            if (char1_cnt < char2_cnt)
-            {
-                common_cnt = char1_cnt;
-            }
-            else
-            {
-                common_cnt = char2_cnt;
-            }
-
-            answer += str1.substr(str1.find_first_of(str1[i]), common_cnt);
-            i += char1_cnt;
+            answer = "0";
+            break;
         }
-        else
+        
+        for(int j =0; j<cnt; j++)
         {
-            i = str1.find_last_of(str1[i]) + 1;
+            answer += it.first;
         }
     }
-
-    if (answer.length() == 0)
-    {
-        return "-1";
-    }
-    else if (answer[0] == '0')
-    {
-        return "0";
-    }
+    
+    if(answer.empty()) answer = "-1";
 
     return answer;
 }
