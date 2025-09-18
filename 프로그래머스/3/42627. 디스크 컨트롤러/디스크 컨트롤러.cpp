@@ -28,8 +28,8 @@ int solution(vector<vector<int>> jobs) {
         {
             vector<int> next_job = ready_queue.top();
             ready_queue.pop();
-            if(next_job[0] > curr_time) curr_time = next_job[0] + next_job[1];
-            else curr_time += next_job[1];
+            if(next_job[0] > curr_time) curr_time = next_job[0];
+            curr_time += next_job[1];
             total_time += curr_time - next_job[0];
         }
         
