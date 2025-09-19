@@ -6,8 +6,8 @@
 using namespace std;
 
 int solution(string s) {
-    int answer = INT_MAX;
-    for(int n = 1; n<=s.length()/2+1; ++n)
+    int answer = s.length();
+    for(int n = 1; n<=s.length()/2; ++n)
     {
         string base_str = s.substr(0, n);
         int cnt = 1;
